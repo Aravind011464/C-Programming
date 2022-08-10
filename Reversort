@@ -1,0 +1,47 @@
+#include<stdio.h>
+
+void reversort(int[],int);
+void reverse(int[],int,int);
+
+int main(){
+    int count=0;
+    printf("Enter the number of elements in the array : ");
+    scanf("%d",&count);
+    int array[count];
+    for(int i=0;i<count;i++){
+        printf("Enter element %d : ",i+1);
+        scanf("%d",&array[i]);
+    }
+    reversort(array,count);
+}
+
+void reversort(int arr[],int len){
+    int min;
+    int index;
+    for(int i=0;i<len;i++){
+        min=arr[i];
+        index=i;
+        for(int j=i;j<len;j++){
+            if(arr[j]<min){
+                min=arr[j];
+                index=j;
+            }
+        }
+        reverse(arr,i,index);
+    }
+    printf("The elements in the array in ascending order are : \n");
+    for(int i=0;i<len;i++){
+        printf("%d ",arr[i]);
+    }
+}
+
+void reverse(int arr_rev[],int start,int stop){
+    int temp;
+    while(start<=stop){
+        temp=arr_rev[start];
+        arr_rev[start]=arr_rev[stop];
+        arr_rev[stop]=temp;
+        start++;
+        stop--;
+    }
+}

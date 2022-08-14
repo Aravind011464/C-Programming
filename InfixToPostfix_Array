@@ -1,0 +1,99 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define Max 100
+
+char stk[Max];
+int top=-1;
+
+void push(char stk[],char val){
+    if(top==-1){
+        stk[0]=val;
+        top++;
+    }
+    else{
+        top++;
+        stk[top]=val;
+    }
+}
+
+int pop(char stk[]){
+    int pop_value=stk[top];
+    top--;
+    return pop_value;
+}
+
+int getPriority(char op){
+    if(op=='*'||op=='/'||op=='%'){
+        return 1;
+    }
+    else if(op=='+'||op=='-'){
+        return 0;
+    }
+}
+
+void infix_to_postfix(char source[],char target[]){
+    
+    int i=0,j=0;
+    
+    char temp;
+    strcpy(target,"");
+    
+    while(source[i]!='\0'){
+        
+        if(source[i]=='('){
+            push(stk,source[i]);
+            i++;
+        }
+        else if(source[i]==')'){
+            while((top!=-1) && stk[top]!='('){
+                target[j]=pop(stk);
+                j++;
+            }
+            if(top==-1){
+                printf("INCORRECT EXPRESSION!");
+                exit(0);
+            }
+            temp=pop(stk);
+            i++;
+        }
+        else if(isdigit(source[i])||isalpha(source[i])){
+            target[j]=source[i];
+            i++;
+            j++;
+        }
+        else if(source[i]=='*'||source[i]=='/'||source[i]=='%'||source[i]=='-'||source[i]=='+'){
+            while((top!=-1) && stk[top]!='(' && getPriority(stk[top])>=getPriority(source[i])){
+                target[j]=pop(stk);
+                j++;
+            }
+            push(stk,source[i]);
+            i++;
+        }
+        else{
+            printf("INCORRECT EXPRESSION");
+            exit(1);
+        }
+    }
+    while((top!=-1) && (stk[top])!='('){
+            target[j]=pop(stk);
+            j++;
+        }
+        target[j]='\0';
+}
+
+int main(){
+    
+    char infix[100];
+    char postfix[100];
+    
+    printf("Enter the infix expression : ");
+    scanf("%s",infix);
+    
+    infix_to_postfix(infix,postfix);
+    printf("\n\nThe postfix expression is : %s",postfix);
+    
+    return 0;
+}
+

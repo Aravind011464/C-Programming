@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node* next;
+};
+
+struct Node* top=NULL;
+
+struct Node* insert_beginning(struct Node* top){
+    
+    struct Node*new_node,*ptr;
+    
+    int num=0;
+    
+    printf("Enter -1 to end.");
+    
+    printf("\n\nEnter the number : ");
+    scanf("%d",&num);
+    
+    while(num!=-1){
+        
+        new_node=(struct Node*)malloc(sizeof(struct Node));
+        new_node->data=num;
+        
+        if(top==NULL){
+            new_node->next=NULL;
+            top=new_node;
+        }
+        else{
+            new_node->next=top;
+            top=new_node;
+        }
+        
+        printf("Enter the number :");
+        scanf("%d",&num);
+        
+    }
+    return top;
+}
+void display(struct Node*top){
+    
+    struct Node*ptr;
+    ptr=top;
+    
+    while(ptr->next!=NULL){
+        printf(" %d ",ptr->data);
+        ptr=ptr->next;
+    }
+    printf(" %d ",ptr->data);
+    
+}
+
+struct Node*pop(struct Node*top){
+    
+    struct Node*ptr;
+    ptr=top;
+    
+    int pop_value = ptr->data;
+    
+    printf("\n\nThe value popped is : %d\n\n",pop_value);
+    
+    if(top==NULL){
+        printf("STACK UNDERFLOW");
+    }
+    else{
+        top=top->next;
+        free(ptr);
+    }
+    
+    return top;
+}
+
+
+int main(){
+    
+    top=insert_beginning(top);
+    display(top);
+
+    top=pop(top);
+    display(top);
+    
+}

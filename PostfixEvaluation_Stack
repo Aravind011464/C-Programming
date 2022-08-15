@@ -1,0 +1,152 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    float data;
+    struct Node* next;
+};
+
+struct Node* top=NULL;
+
+struct Node* insert_at_beginning(struct Node* top,float val){
+    
+    struct Node* new_node,*ptr;
+    
+    new_node=(struct Node*)malloc(sizeof(struct Node));
+    new_node->data=val;
+    
+    if(top==NULL){
+        new_node->next=NULL;
+        top=new_node;
+    }
+    else{
+        new_node->next=top;
+        top=new_node;
+    }
+    return top;
+}
+
+struct Node* pop(struct Node *top){
+    
+    struct Node*ptr;
+    ptr=top;
+    int pop_value=0;
+    
+    if(top==NULL){
+        printf("ERROR OCCURED");
+        exit(0);
+    }
+    else{
+        pop_value=top->data;
+        top=top->next;
+        free(ptr);
+    }
+    return top;
+}
+
+float peek(struct Node *top){
+    if(top==NULL){
+        printf("ERROR OCCURED");
+        exit(1);
+    }
+    else{
+        return top->data;
+    }
+}
+
+void display(struct Node*top){
+    
+    struct Node*ptr;
+    ptr=top;
+    
+    while(ptr->next!=NULL){
+        printf(" %f ",ptr->data);
+        ptr=ptr->next;
+    }
+    printf(" %f ",ptr->data);
+    
+}
+
+float postfix_evaluation(char source[]){
+    
+    printf("\n\nThe stack is : \n");
+    
+    int i=0;
+    float op1=0,op2=0;
+    float temp;
+    
+    while(source[i]!='\0'){
+        
+        if(isdigit(source[i])){
+            top=insert_at_beginning(top,(float)(source[i]-'0'));
+            i++;
+        }
+        
+        else{
+            if(source[i]=='+'){
+                op1=peek(top);
+                top=pop(top);
+                op2=peek(top);
+                top=pop(top);
+                temp=op1+op2;
+                i++;
+                top=insert_at_beginning(top,temp);
+            }
+            else if(source[i]=='-'){
+                op1=peek(top);
+                top=pop(top);
+                op2=peek(top);
+                top=pop(top);
+                temp=op2-op1;
+                top=insert_at_beginning(top,temp);
+                i++;
+            }
+            else if(source[i]=='*'){
+                op1=peek(top);
+                top=pop(top);
+                op2=peek(top);
+                top=pop(top);
+                temp=op1*op2;
+                top=insert_at_beginning(top,temp);
+                i++;
+            }
+            else if(source[i]=='/'){
+                op1=peek(top);
+                top=pop(top);
+                op2=peek(top);
+                top=pop(top);
+                temp=op2/op1;
+                top=insert_at_beginning(top,temp);
+                i++;
+            }
+            else if(source[i]=='%'){
+                op1=peek(top);
+                top=pop(top);
+                op2=peek(top);
+                top=pop(top);
+                temp=(int)op2%(int)op1;
+                top=insert_at_beginning(top,temp);
+                i++;
+            }
+            else{
+                printf("Incorrect expression");
+                exit(2);
+            }
+        }
+        display(top);
+        printf("\n\n");
+    }
+    return peek(top);
+}
+
+int main(){
+    
+    char postfix[100];
+    printf("Enter the postfix expression : ");
+    scanf("%s",postfix);
+    float answer=0;
+    answer=postfix_evaluation(postfix);
+    printf("The evaluated value of postfix expression is : %f",answer);
+    
+    return 0;
+}

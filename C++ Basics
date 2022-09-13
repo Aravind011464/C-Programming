@@ -1,0 +1,58 @@
+#include<iostream>
+#include<cmath>
+#include<typeinfo>
+
+using namespace std;
+/*
+Learning c++
+Multi line comments !!
+*/
+int main(){
+    
+    int a=0;
+    int b=0;
+    
+    cout << "Hello World" << endl;
+    cout << "a = " << a+2 << endl 
+         << "b = " << b << endl;
+    
+    cout << "Enter the values of a and b : " ;
+    
+    cin >> a >> b;
+    
+    cout << "The modified value of a is : " << a << endl;
+    cout << "The modified value of b is : " << b << endl;
+    
+    int c=0, d=2.3;
+    c=pow(2,3);
+    
+    const double pi =3.24; //value of pi doesn't change 
+    
+    cout << "The value of c is : " << c << endl;
+    cout << "The floor value of d is : " << floor(d) << endl;
+    
+    int e {}; // brace initialization
+    cout << "The value of e is : " << e << endl;
+    // by default value of e becomes 0 by brace initialization
+    
+    int f {3};
+    cout << "The value of f is : " << f << endl;
+    
+    int g=3.4;
+    cout << "The value of g is : " << g << endl;
+    // g is an integer so it takes 3 instead of 3.14. Error is not raised
+    // this cannot be done in brace initialization
+    
+    auto h =3; //auto is used to set the datatype of variables automatically by the caompiler
+    auto i =true;
+    cout << "The type of h is : " << typeid(h).name() << endl;
+    cout << "The type of i is : " << typeid(i).name() << endl;
+    
+    // i in output is integer
+    // b in output is boolean
+    return 0;
+}
+
+// << is stream insertion operator
+// >> is stream extraction operator
+

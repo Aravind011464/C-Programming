@@ -1,0 +1,91 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main(){
+    
+    int num[5]={1,2,3,4,5};
+    for(const int &var : num){ //ranged for loop
+        cout << var << " ";
+    }
+    cout << endl;
+// ranged for loops are used with arrays and vectors
+// &var -> points to the elements of num in each iteration
+// it is used since it is memory efficient
+    
+    for(const int &var : {9,8,7,6,5}){ //creating new collection
+        cout << var << " ";
+    }
+// const keyword is used if we do not want to change the elements in array
+    
+    vector<int> vector1 = {1,2,3,4,5}; // vector 
+    cout << "\nThe elements in vector1 are :" ;
+    for(const int &var : vector1){
+        cout << var << " ";
+    }
+    // vectors are array_like structures used to store values of different  data types
+    // they are contiguous and can be accessed with iterators
+    
+    vector<int> vector2 {6,7,8,9,0}; // other type of initialization
+    cout << "\nThe elements in vector2 are :" ;
+    for(const int &var : vector2){
+        cout << var << " ";
+    }
+    
+    //vector functions
+    
+    vector1.push_back(6); //inserts the value at the end of the vector 
+    vector1.push_back(7);
+    
+    cout << "\nThe elements in vector1 of pushing are :";
+    for(const int &var : vector1){
+        cout << var << " ";
+    }
+    vector1.pop_back(); //deletes the last element of the vector
+    
+    cout << "\nThe elements of vector1 after popping are :";
+    for(const int &var : vector1){
+        cout << var << " ";
+    }
+    int access_0 = vector1.at(0);
+    cout << "\nThe element at index 0 of vector1 is :" << access_0 ;
+    
+    cout << "\nThe element at index 10 of vector1 is :" << vector1[10];
+    // even [index] can be used to access elements of vector
+    // but .at() is preferred bcoz it throws an exception when out of range
+    // [index] returns a garbage value instead
+    
+    /*
+    int access_9 = vector1.at(9);
+    cout << "\nThe element at index 9 of vector1 is :" << access_9;
+    This returns an exception!
+    */
+    
+    vector1.at(0)=50; //for modifying the value of elements in vectors
+    vector1.at(1)=51;
+    
+    cout << "\nThe updated vector1 is :" ;
+    for(const int &var : vector1){
+        cout << var << " ";
+    }
+    
+    int size = vector1.size(); //returns the number of elements 
+    cout << "\nThe size of vector1 is : " << size;
+    
+    vector<int>::iterator iter;
+    iter = vector1.begin();
+    cout << "\nThe first element of vector1 is :" << *iter;
+    iter = vector1.end()-1;
+    cout << "\nThe last element of vector1 is : " << *iter;
+    // .end() refers to element after the last element
+    // .end()-1 refers to the last element
+    
+    cout << "\n";
+    
+    for(iter=vector1.begin();iter!=vector1.end();iter++){
+        cout << *iter << " ";
+    }
+    
+    return 0;
+}

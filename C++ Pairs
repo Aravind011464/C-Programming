@@ -1,0 +1,63 @@
+#include<iostream>
+#include<utility>
+#include<tuple>
+#include<vector>
+#include<algorithm>
+
+
+using namespace std;
+
+pair<int,int> coordinates(int x, int y){
+    return {x+2,y+2};
+}
+
+int main(){
+    
+    pair <int,int> pair1;
+    pair1= make_pair(5,3);
+    cout << pair1.first << " " << pair1.second << endl;
+    
+    pair <int,int> pair2(10,11);
+    cout << pair2.first << " " << pair2.second;
+    
+    pair1.swap(pair2);
+    
+    cout << "\nAfter swapping : \n";
+    
+    cout << pair1.first << " " << pair1.second << endl;
+    cout << pair2.first << " " << pair2.second << endl;
+    
+    pair <int,int> pair3;
+    pair3 = coordinates(2,3);
+    //pairs are used if we want to return 2 values in a function
+    
+    cout << pair3.first << " " << pair3.second;
+    
+    pair<int,int> arr[5];
+    // it is an array of 5 pairs
+    
+    vector<int> arr2[5];
+    // it is an array of 5 vectors
+    
+    arr[0]={1,2};
+    arr[1]={5,2};
+    arr[2]={8,1};
+    arr[3]={1,0};
+    arr[4]={3,4};
+    
+    cout << "\nBefore Sorting : ";
+    for(int i=0;i<5;i++){
+        cout << arr[i].first << "" << arr[i].second;
+        cout << " ";
+    }
+    
+    sort(arr,arr+5);
+    
+    cout << "\nAfter sorting : ";
+    for(int i=0;i<5;i++){
+        cout << arr[i].first << "" << arr[i].second;
+        cout << " ";
+    }
+    
+    return 0;
+}

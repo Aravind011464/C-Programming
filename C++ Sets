@@ -1,0 +1,86 @@
+#include<iostream>
+#include<set>
+#include<iterator>
+#include<algorithm>
+#include<utility>
+
+using namespace std;
+
+int main(){
+    
+    set<int> set1;
+    //set1={}
+    
+    cout << "Set1 : ";
+    for(const int &var: set1){
+        cout << var << " ";
+    }
+    
+    cout << endl;
+    
+    set<int,greater<int>> set2={1,3,4,1,2};
+    //set2 = {4,3,2,1} - sorts in descending order
+    
+    cout << "Set2 : ";
+    for(const int &var: set2){
+        cout << var << " ";
+    }
+    
+    cout << endl;
+    
+    cout << "Set3 : ";
+    set<int, greater<int>> set3(set2);
+    for(const int &var: set3){
+       cout << var << " ";
+    }
+    
+    int arr[]={2,4,1,2,3,7,5};
+    set<int> set4(arr,arr+7);
+    
+    cout  << endl;
+    
+    cout << "Set4 : ";
+    
+    for(const int &var: set4){
+        cout << var << " ";
+    }
+    
+    set4.insert(10);
+    set4.insert(15);
+    
+    set<int> :: iterator iter;
+    
+    cout << endl;
+    
+    cout << "The updated set4 is : ";
+    
+    for(iter=set4.begin();iter!=set4.end();iter++){
+        cout << *iter << " ";
+    }
+    
+    iter = set4.find(4); //returns an iterator
+    //if not found, returns end
+    
+    cout << endl;
+    
+    cout << "The elements from 4 in set4 are : ";
+    
+    
+    while(iter!=set4.end()){
+        cout << *iter << " ";
+        iter++;
+    }
+    
+    cout << endl;
+    
+    set4.erase(set4.begin(),set4.find(5));
+    // 5 is not erased
+    
+    cout << "The updated set is : ";
+    
+    for(const int &var: set4){
+        cout << var << " ";
+    }
+    
+    return 0;
+}

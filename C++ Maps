@@ -1,0 +1,76 @@
+#include<iostream>
+#include<map>
+#include<iterator>
+#include<utility>
+#include<algorithm>
+
+using namespace std;
+
+int main(){
+    
+    map<int,int> map1;
+    cout << map1.size() << endl;
+    
+    map1[0]; //sets the value of key 0 to 0
+    map1[5]=3;
+    map1[3]=2;
+    cout << map1.size() << endl;
+    
+    for(auto &var: map1){
+        cout << var.first << " " << var.second << endl;
+    }
+    /*
+    another way to print a map : 
+    
+    for(auto &[key,value]: map1){
+        cout << "Key : " << key << "Value : " << value << endl;
+    }
+    */
+    map<int,int> :: iterator iter;
+    //printing map using iterators
+    for(iter=map1.begin();iter!=map1.end();iter++){
+        cout << iter->first << " " << iter->second << endl;
+    }
+    //*iter.first is same as iter->first
+    //keys are always present in sorted order
+    
+    map<int,int> map2={{1,2},{3,4},{5,6}};
+    //ways to insert in a map
+    map2.insert({{7,8},{9,10}});
+    map2.insert(pair<int,int>(11,12));
+    map2.insert(map2.end(),pair<int,int>(13,14));
+    
+    for(auto &[key,value] : map2){
+        cout << "Key : " << key <<" "<< " Value : " << value << endl;
+    }
+    iter=map2.find(7);
+    //returns an iterator whose key is 7
+    for(auto it=iter;it!=map2.end();it++){
+        cout << it->first << " " << it->second << endl;
+    }
+    map2.erase(iter);
+    //erasing with an iterator
+    map2.erase(9);
+    //erasing with a key
+    
+    for(auto &[key,value]: map2){
+        cout << key << " " << value << endl;
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
